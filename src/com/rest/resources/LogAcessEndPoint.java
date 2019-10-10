@@ -3,8 +3,8 @@ package com.rest.resources;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-@Path("/MyRes")
-public class MyResource {
+@Path("/log-acess")
+public class LogAcessEndPoint {
 
 	@Path("/getData")
 	@GET
