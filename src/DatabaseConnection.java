@@ -1,5 +1,6 @@
 import java.sql.Connection; 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,76 +11,42 @@ public class DatabaseConnection {
 
 	public DatabaseConnection() {}
 
-	public static Connection getConexaoMySQL() {
+	public static void getConexaoMySQL() throws SQLException {
 
-		Connection connection = null;
-
-		try {
-
-			String serverName = "localhost";
-
-			String mydatabase = "logs";
-
-			String url = "jdbc:sqlite:C:/sqlite/database.db";
-			 
-			connection = DriverManager.getConnection(url);
-
-			
-			
-			
-			
-
+		    try
+		    {
+		      // create our mysql database connection
+		      //String myDriver = "org.gjt.mm.mysql.Driver";
+		      String myUrl = "jdbc:sqlite:C:/Users/thiag/Desktop/projetos/database.db";
+		      //Class.forName(myDriver);
+		      Connection conn = DriverManager.getConnection(myUrl, "root", "123456");
+		      
 		      // our SQL SELECT query. 
 		      // if you only need a few columns, specify them by name instead of using "*"
 		      String query = "SELECT * FROM logs";
 
 		      // create the java statement
-		      Statement st = connection.createStatement();
+		      Statement st = conn.createStatement();
 		      
 		      // execute the query, and get a java resultset
 		      ResultSet rs = st.executeQuery(query);
-			
-			
+		      
+		      // iterate through the java resultset
 		      while (rs.next())
 		      {
-		        String url2 = rs.getString("url");
-		        System.out.println(url2);
+		        String url = rs.getString("url");
+		        System.out.println(url);
 		      }
-			
-			
-			
-			
-			if (connection != null) {
-				status = ("STATUS--->Conectado com sucesso!");
-			} else {
-				status = ("STATUS--->Não foi possivel realizar conexão");
-			}
+		      st.close();
+		    }
+		    catch (Exception e)
+		    {
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		    }
+		  }
+		
+		
 
-			return connection;
-
-		} catch (SQLException e) {
-			System.out.println("Nao foi possivel conectar ao Banco de Dados.");
-			return null;
-		}
-	}
-
-	public static String statusConection() {
-		return status;
-	}
-
-	public static boolean FecharConexao() {
-		try {
-			DatabaseConnection.getConexaoMySQL().close();
-			return true;
-		} catch (SQLException e) {
-			return false;
-		}
-	}
-
-	public static java.sql.Connection ReiniciarConexao() {
-		FecharConexao();
-		return DatabaseConnection.getConexaoMySQL();
-
-	}
 
 }
