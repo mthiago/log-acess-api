@@ -16,7 +16,6 @@ public class LogAcessEndPoint {
 	@Produces("application/json;charset=utf-8")
 	@Consumes("application/json")
 	public String getData(LogRequest request) {
-		
 		return request.getUrl();
 	}
 
