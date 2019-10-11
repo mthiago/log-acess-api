@@ -1,3 +1,5 @@
+package com.rest.resources;
+
 import java.sql.Connection; 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ public class DatabaseConnection {
 
 		    try
 		    {
+		    	Class.forName("org.sqlite.JDBC");
 		      // create our mysql database connection
 		      //String myDriver = "org.gjt.mm.mysql.Driver";
 		      String myUrl = "jdbc:sqlite:C:/Users/thiag/Desktop/projetos/database.db";
