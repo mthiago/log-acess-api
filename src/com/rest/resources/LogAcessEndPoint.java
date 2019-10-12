@@ -37,9 +37,24 @@ public class LogAcessEndPoint {
 
            rs = Stmt.executeQuery();
            rs.next();
-           String asda = rs.getString(1);
+           String metricCats = rs.getString(1);
+           
+          Stmt.close();
 	        
 	        
+	           query = "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%'";
+
+
+	           //PEGANDO CONTAGEM DE VISITANTES
+	           Stmt = connection.prepareStatement(query);
+
+	           rs = Stmt.executeQuery();
+	           rs.next();
+	           String metricDogs = rs.getString(1);
+          
+          
+          
+          
 	       
 		} catch (SQLException e) {
 			e.printStackTrace();
