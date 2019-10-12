@@ -27,42 +27,25 @@ public class LogAcessEndPoint {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
+			
 			Connection connection = DatabaseConnection.getConexaoMySQL();
-
-			String query = "select * from logs";
-
+           String query = "select count(*) from logs where url like '%/pets/exotic/cats/10%'";
 
 
-			PreparedStatement stmt = connection.prepareStatement(query);
-			ResultSet resultSet = stmt.executeQuery();       
+           //PEGANDO CONTAGEM DE VISITANTES
+           PreparedStatement Stmt = connection.prepareStatement(query);
 
-			List<LogRequest> list = new ArrayList();
-			while (resultSet.next()){
-
-				LogRequest log = new LogRequest(); 
-
-				log.setUrl(resultSet.getString("url"));
-				log.setTimestamp(resultSet.getLong("timestamp"));
-				log.setUserId(resultSet.getString("userId"));
-				log.setRegion(resultSet.getInt("region"));
-             
-
-				list.add(log);                        
-				log = null;
-			}                
-
-			stmt.close();
-
-
-
-
-
-
-			return true;
+           rs = Stmt.executeQuery();
+           rs.next();
+           String asda = rs.getString(1);
+	        
+	        
+	       
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
+		return null;
 	}
 
 	@POST
