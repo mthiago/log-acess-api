@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
@@ -17,6 +19,52 @@ import request.LogRequest;
 @Consumes(MediaType.APPLICATION_JSON)
 public class LogAcessEndPoint {
 
+	@GET
+	@Path("/laar/metrics")
+	@Produces("application/json;charset=utf-8")
+	@Consumes("application/json")
+	public Boolean metrics() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Connection connection = DatabaseConnection.getConexaoMySQL();
+
+			String query = "select * from logs";
+
+
+
+			PreparedStatement stmt = connection.prepareStatement(query);
+			ResultSet resultSet = stmt.executeQuery();       
+
+			List<LogRequest> list = new ArrayList();
+			while (resultSet.next()){
+
+				LogRequest log = new LogRequest(); 
+
+				log.setUrl(resultSet.getString("url"));
+				log.setTimestamp(resultSet.getLong("timestamp"));
+				log.setUserId(resultSet.getString("userId"));
+				log.setRegion(resultSet.getInt("region"));
+             
+
+				list.add(log);                        
+				log = null;
+			}                
+
+			stmt.close();
+
+
+
+
+
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	@POST
 	@Path("/laar/ingest")
 	@Produces("application/json;charset=utf-8")
@@ -25,26 +73,26 @@ public class LogAcessEndPoint {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-		Connection connection = DatabaseConnection.getConexaoMySQL();
-		
-	      // the mysql insert statement
-	      String query = "INSERT INTO LOGS(url, timestamp, userId, region) VALUES(?, ?, ?, ?)";
+			Connection connection = DatabaseConnection.getConexaoMySQL();
 
-	      // create the mysql insert preparedstatement
-	      pstmt = connection.prepareStatement(query);
+			// the mysql insert statement
+			String query = "INSERT INTO LOGS(url, timestamp, userId, region) VALUES(?, ?, ?, ?)";
+
+			// create the mysql insert preparedstatement
+			pstmt = connection.prepareStatement(query);
 
 			pstmt.setString(1, request.getUrl());
 			pstmt.setLong(2, request.getTimestamp());
 			pstmt.setString(3, request.getUserId());
 			pstmt.setInt(4, request.getRegion());
-        pstmt.executeUpdate();
-        pstmt.close();
-		
-	        return true;
-	    } catch (SQLException e) {
-	       e.printStackTrace();
-	        return false;
-	    }
+			pstmt.executeUpdate();
+			pstmt.close();
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
