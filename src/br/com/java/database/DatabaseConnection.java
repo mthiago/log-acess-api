@@ -1,4 +1,4 @@
-package com.rest.resources;
+package br.com.java.database;
 
 import java.sql.Connection; 
 import java.sql.DriverManager;

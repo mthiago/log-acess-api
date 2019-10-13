@@ -1,4 +1,4 @@
-package com.rest.resources;
+package br.com.java.endpoint;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +21,14 @@ import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
-import request.LogRequest;
+import br.com.java.database.DatabaseConnection;
+import br.com.java.model.Acessos;
+import br.com.java.model.AcessosMinuto;
+import br.com.java.model.AllTimestamp;
+import br.com.java.model.LogModel;
+import br.com.java.model.Metric1Response;
+import br.com.java.model.Regiao;
+import br.com.java.model.Regioes;
 
 @Path("/log-acess")
 @Produces(MediaType.APPLICATION_JSON)
@@ -582,7 +589,7 @@ public class LogAcessEndPoint {
 	@Path("/laar/ingest")
 	@Produces("application/json;charset=utf-8")
 	@Consumes("application/json")
-	public Boolean salvarLog(LogRequest request) {
+	public Boolean salvarLog(LogModel request) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {

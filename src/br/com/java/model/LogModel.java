@@ -1,9 +1,9 @@
-package request;
+package br.com.java.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class LogRequest {
+public class LogModel {
 
 	private String url;
 	private Long timestamp;

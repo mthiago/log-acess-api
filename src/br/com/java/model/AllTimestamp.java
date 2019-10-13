@@ -1,4 +1,4 @@
-package com.rest.resources;
+package br.com.java.model;
 
 import java.util.List;
 
