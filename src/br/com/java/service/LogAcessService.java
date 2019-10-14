@@ -52,6 +52,7 @@ public class LogAcessService {
 		return metricas;
 	}
 
+	//OK
 	public String consultaPrimeiraMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{
 		Integer catsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%'");
 		Integer dogsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%'");
@@ -80,6 +81,7 @@ public class LogAcessService {
 		return msg.toString();
 	}
 
+	//OK
 	private PosicaoAcessoResponse buildInfos(Integer quantidade, String url) {
 		PosicaoAcessoResponse metricResponse = new PosicaoAcessoResponse();
 		metricResponse.setPosition(quantidade);
@@ -87,6 +89,7 @@ public class LogAcessService {
 		return metricResponse;
 	}
 	
+	//OK
 	private AcessosModel buildAcessosRegiao(String animal, Integer regiao, Integer quantidade) {
 		AcessosModel acessos = new AcessosModel();
 		acessos.setAnimal(animal);
@@ -95,6 +98,7 @@ public class LogAcessService {
 		return acessos;
 	}
 
+	//OK
 	public String consultaSegundaMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{		
 		Integer gatosRegiaoUm = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%' and region = 1");
 		Integer gatosRegiaoDois = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%' and region = 2");
@@ -153,8 +157,9 @@ public class LogAcessService {
 			msg.append("Quantidade de acessos região 1: " + ac.getAnimal() + "nro: " + ac.getAcessos() + "\n"); 	  
 		}
 
-	}	
+	}
 
+	//OK
 	private List<AcessosModel> ordenarListaDecrescente(RegiaoModel regiao) {
 		List<AcessosModel> listaOrdenada = regiao.getAcessos().stream()
 				.sorted(Comparator.comparing(AcessosModel::getAcessos).reversed())
@@ -162,6 +167,7 @@ public class LogAcessService {
 		return listaOrdenada;
 	}
 
+	//OK
 	public String consultaTerceiraMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{
 		Integer catsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%'");
 		Integer dogsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%'");
@@ -170,6 +176,7 @@ public class LogAcessService {
 		return msgReturn;
 	}
 
+	//OK
 	public String consultaQuartaMetrica(Connection connection, LogAcessDao logAcessDao, String data){
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = (Date)formatter.parse(data);
@@ -236,6 +243,7 @@ public class LogAcessService {
 		return null;
 	}
 
+	//OK
 	public Boolean salvarLog(LogModel log) {
 		LogAcessDao logAcessDao = new LogAcessDao();
 		Boolean response = logAcessDao.salvarLog(log);
