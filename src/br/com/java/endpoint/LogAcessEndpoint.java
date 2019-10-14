@@ -23,7 +23,12 @@ public class LogAcessEndpoint {
 	@Produces("application/json;charset=utf-8")
 	@Consumes("application/json")
 	public String metrics(@PathParam("data") String data) {
-		String metrics = service.consultaMetricas(data);
+		String metrics = "";
+		try {
+		metrics = service.consultaMetricas(data);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
 		return metrics;
 	}
 
