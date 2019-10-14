@@ -57,21 +57,11 @@ public class LogAcessService {
 		Integer bidInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/tiggers/bid/now%'");
 
 		List<Metric1Response> response = new ArrayList<Metric1Response>();
-
-		Metric1Response cat = new Metric1Response();
-		cat.setPosition(catsInteger);
-		cat.setUrl("/pets/exotic/cats/10");
+		
+		Metric1Response cat = buildInfos(catsInteger, "/pets/exotic/cats/10");
+		Metric1Response dog = buildInfos(dogsInteger, "/pets/guaipeca/dogs/1");
+		Metric1Response bid = buildInfos(catsInteger, "/tiggers/bid/now");
 		response.add(cat);
-
-		Metric1Response dog = new Metric1Response();
-		dog.setPosition(dogsInteger);
-		dog.setUrl("/pets/guaipeca/dogs/1");
-		response.add(dog);
-
-		Metric1Response bid = new Metric1Response();
-		bid.setPosition(bidInteger);
-		bid.setUrl("/tiggers/bid/now");
-		response.add(bid);
 
 		List<Metric1Response> ordenada = response.stream()
 				.sorted(Comparator.comparing(Metric1Response::getPosition).reversed())
@@ -84,27 +74,41 @@ public class LogAcessService {
 				infos = "A url mais acessada no mundo é " + r.getUrl() + " e ela teve " + r.getPosition() + " acessos\n";
 				msg.append(infos);
 			}
-		}		
-		
+		}
 
 		msgReturn = msg.toString();
 
 		return msgReturn;
 	}
 
-	public String consultaSegundaMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{
+	private Metric1Response buildInfos(Integer quantidade, String url) {
+		Metric1Response metricResponse = new Metric1Response();
+		metricResponse.setPosition(quantidade);
+		metricResponse.setUrl(url);
+		return metricResponse;
+	}
+	
+	private AcessosModel buildAcessosRegiao(String animal, Integer regiao, Integer quantidade) {
+		AcessosModel acessos = new AcessosModel();
+		acessos.setAnimal(animal);
+		acessos.setRegiao(regiao);
+		acessos.setAcessos(quantidade);
+		return acessos;
+	}
+
+	public String consultaSegundaMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{		
 		Integer gatosRegiaoUm = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%' and region = 1");
 		Integer gatosRegiaoDois = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%' and region = 2");
 		Integer gatosRegiaoTres = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%' and region = 3");
-		
+
 		Integer dogsRegiaoUm = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%' and region = 1");
 		Integer dogsRegiaoDois = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%' and region = 2");
 		Integer dogsRegiaoTres = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%' and region = 3");
-		
+
 		Integer tigresRegiaoUm = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/tiggers/bid/now%' and region = 1");
 		Integer tigresRegiaoDois = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/tiggers/bid/now%' and region = 2");
 		Integer tigresRegiaoTres = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/tiggers/bid/now%' and region = 3");
-		
+
 
 		RegioesModel regioes = new RegioesModel();
 		List<RegiaoModel> listRegiao = new ArrayList<RegiaoModel>();
@@ -116,60 +120,17 @@ public class LogAcessService {
 		List<AcessosModel> acessosReg2 = new ArrayList<AcessosModel>();
 		List<AcessosModel> acessosReg3 = new ArrayList<AcessosModel>();
 
-		AcessosModel acessosCatReg1 = new AcessosModel();
-		acessosCatReg1.setAnimal("cat");
-		acessosCatReg1.setRegiao(1);
-		acessosCatReg1.setAcessos(gatosRegiaoUm);
-		acessosReg1.add(acessosCatReg1);
+		AcessosModel acessosCatReg1 = buildAcessosRegiao("cat", 1, gatosRegiaoUm);
+		AcessosModel acessosCatReg2 = buildAcessosRegiao("cat", 2, gatosRegiaoDois);
+		AcessosModel acessosCatReg3 = buildAcessosRegiao("cat", 3, gatosRegiaoTres);
 
-		AcessosModel acessosCatReg2 = new AcessosModel();
-		acessosCatReg2.setAnimal("cat");
-		acessosCatReg2.setRegiao(2);
-		acessosCatReg2.setAcessos(gatosRegiaoDois);
-		acessosReg2.add(acessosCatReg2);
-
-		AcessosModel acessosCatReg3 = new AcessosModel();
-		acessosCatReg3.setAnimal("cat");
-		acessosCatReg3.setRegiao(3);
-		acessosCatReg3.setAcessos(gatosRegiaoTres);
-		acessosReg3.add(acessosCatReg3);
-
-		AcessosModel acessosDogReg1 = new AcessosModel();
-		acessosDogReg1.setAnimal("dog");
-		acessosDogReg1.setRegiao(1);
-		acessosDogReg1.setAcessos(dogsRegiaoUm);
-		acessosReg1.add(acessosDogReg1);           
-
-		AcessosModel acessosDogReg2 = new AcessosModel();
-		acessosDogReg2.setAnimal("dog");
-		acessosDogReg2.setRegiao(2);
-		acessosReg2.add(acessosDogReg2);
-		acessosDogReg2.setAcessos(dogsRegiaoDois);
-
-		AcessosModel acessosDogReg3 = new AcessosModel();
-		acessosDogReg3.setAnimal("dog");
-		acessosDogReg3.setRegiao(1);
-		acessosDogReg3.setAcessos(dogsRegiaoTres);
-		acessosReg3.add(acessosDogReg3);
-
-		AcessosModel acessosBidReg1 = new AcessosModel();
-		acessosBidReg1.setAnimal("bid");
-		acessosBidReg1.setRegiao(1);
-		acessosBidReg1.setAcessos(tigresRegiaoUm);
-		acessosReg1.add(acessosBidReg1);
-
-		AcessosModel acessosBidReg2 = new AcessosModel();
-		acessosBidReg2.setAnimal("bid");
-		acessosBidReg2.setRegiao(2);
-		acessosBidReg2.setAcessos(tigresRegiaoDois);
-		acessosReg2.add(acessosBidReg2);
-
-		AcessosModel acessosBidReg3 = new AcessosModel();
-		acessosBidReg3.setAnimal("bid");
-		acessosBidReg3.setRegiao(2);
-		acessosBidReg3.setAcessos(tigresRegiaoTres);
-		acessosReg3.add(acessosBidReg3);
-
+		AcessosModel acessosDogReg1 = buildAcessosRegiao("dog", 1, dogsRegiaoUm);
+		AcessosModel acessosDogReg2 = buildAcessosRegiao("dog", 2, dogsRegiaoDois);
+		AcessosModel acessosDogReg3 = buildAcessosRegiao("dog", 3, dogsRegiaoTres);
+		
+		AcessosModel acessosBidReg1 = buildAcessosRegiao("bid", 1, tigresRegiaoUm);
+		AcessosModel acessosBidReg2 = buildAcessosRegiao("bid", 2, tigresRegiaoDois);
+		AcessosModel acessosBidReg3 = buildAcessosRegiao("bid", 3, tigresRegiaoTres);
 
 		regiao1.setAcessos(acessosReg1);
 		regiao2.setAcessos(acessosReg2);
@@ -179,37 +140,28 @@ public class LogAcessService {
 		listRegiao.add(regiao2);
 		listRegiao.add(regiao3);
 
-
 		regioes.setRegiao(listRegiao);
 
-
-
-
-		List<AcessosModel> accreg1 = regioes.getRegiao().get(0).getAcessos().stream()
-				.sorted(Comparator.comparing(AcessosModel::getAcessos).reversed())
-				.collect(Collectors.toList()); 
-
-		List<AcessosModel> accreg2 = regioes.getRegiao().get(0).getAcessos().stream()
-				.sorted(Comparator.comparing(AcessosModel::getAcessos).reversed())
-				.collect(Collectors.toList()); 
-
-		List<AcessosModel> accreg3 = regioes.getRegiao().get(0).getAcessos().stream()
-				.sorted(Comparator.comparing(AcessosModel::getAcessos).reversed())
-				.collect(Collectors.toList()); 	          
+		List<AcessosModel> accreg1 = ordenarListaDecrescente(regioes.getRegiao().get(0));
+		List<AcessosModel> accreg2 = ordenarListaDecrescente(regioes.getRegiao().get(1));
+		List<AcessosModel> accreg3 = ordenarListaDecrescente(regioes.getRegiao().get(3));
 
 		String infos = "";
 
 		StringBuilder msg = new StringBuilder();
 
-
-
 		for (AcessosModel ac : accreg1) {
 			msg.append("Quantidade de acessos região 1: " + ac.getAnimal() + "nro: " + ac.getAcessos() + "\n"); 	  
 		}
-		
-		
-		
+
 	}	
+
+	private List<AcessosModel> ordenarListaDecrescente(RegiaoModel regiao) {
+		List<AcessosModel> listaOrdenada = regiao.getAcessos().stream()
+				.sorted(Comparator.comparing(AcessosModel::getAcessos).reversed())
+				.collect(Collectors.toList()); 
+		return listaOrdenada;
+	}
 
 	public String consultaTerceiraMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{
 		Integer catsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%'");
@@ -231,21 +183,9 @@ public class LogAcessService {
 
 		List<Metric1Response> response = new ArrayList<Metric1Response>();
 
-		Metric1Response cat = new Metric1Response();
-		cat.setPosition(catsInteger);
-		cat.setUrl("/pets/exotic/cats/10");
-		response.add(cat);
-
-
-		Metric1Response dog = new Metric1Response();
-		dog.setPosition(dogsInteger);
-		dog.setUrl("/pets/guaipeca/dogs/1");
-		response.add(dog);
-
-		Metric1Response bid = new Metric1Response();
-		bid.setPosition(bidsInteger);
-		cat.setUrl("/tiggers/bid/now");
-		response.add(cat);
+		Metric1Response cat = buildInfos(catsInteger, "/pets/exotic/cats/10");
+		Metric1Response dog = buildInfos(dogsInteger, "/pets/guaipeca/dogs/1");
+		Metric1Response bid = buildInfos(catsInteger, "/tiggers/bid/now");
 
 		List<Metric1Response> ordenada = response.stream()
 				.sorted(Comparator.comparing(Metric1Response::getPosition).reversed())
@@ -266,31 +206,20 @@ public class LogAcessService {
 	public String consultaQuintaMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{
 		List<Long> asdadqd = logAcessDao.consultaDadosTimestamp(connection, "select timestamp from logs");
 
-
 		List<AcessosMinutoModel> acessosMinuto = new ArrayList<AcessosMinutoModel>();
-		for (int i=0; i<=59; i++) {
+		for (int i=0; i<=59; i++) {		
 			AcessosMinutoModel acessoMinuto = new AcessosMinutoModel();
 			acessoMinuto.setMinuto(i);
 			acessosMinuto.add(acessoMinuto);
 		}
 
 		for (Long qdqdq : asdadqd) {
-
 			if (qdqdq.equals(Long.valueOf(1570853975))){
-
 				Timestamp t = new Timestamp(qdqdq);
-
-
-
 				Date dadas = new Date(t.getTime());
-
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(dadas);
-
 				Integer minuto = calendar.get(Calendar.MINUTE);
-
-
-
 				for (AcessosMinutoModel asdqdq : acessosMinuto) {
 					if (minuto == asdqdq.getMinuto() ) {
 						if ( asdqdq.getQuantidade() != null) {
