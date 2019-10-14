@@ -4,6 +4,7 @@ public class Metric1Response {
 
 	private String url;
 	private Integer position;
+
 	public String getUrl() {
 		return url;
 	}

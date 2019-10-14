@@ -1,4 +1,5 @@
 package br.com.java.enums;
+
 public enum RegionEnum {
 	
 	US_EAST(1),

@@ -1,9 +1,10 @@
 package br.com.java.model;
 
-public class AcessosMinuto {
+public class AcessosMinutoModel {
 
 	private Integer minuto;
 	private Integer quantidade;
+
 	public Integer getMinuto() {
 		return minuto;
 	}
@@ -16,7 +17,5 @@ public class AcessosMinuto {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-	
-	
 	
 }

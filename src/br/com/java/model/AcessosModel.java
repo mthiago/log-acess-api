@@ -1,10 +1,11 @@
 package br.com.java.model;
 
-public class Acessos {
+public class AcessosModel {
 
 	private String animal;
 	private Integer regiao;
 	private Integer acessos;
+
 	public String getAnimal() {
 		return animal;
 	}

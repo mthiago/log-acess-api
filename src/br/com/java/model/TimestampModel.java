@@ -2,7 +2,7 @@ package br.com.java.model;
 
 import java.util.List;
 
-public class AllTimestamp {
+public class TimestampModel {
 	
 	private List<Long> timestamp;
 
