@@ -2,6 +2,7 @@ package br.com.java.model;
 
 import java.util.List;
 
+//OK
 public class RegioesModel {
 
 	private List<RegiaoModel> regiao;
@@ -13,7 +14,5 @@ public class RegioesModel {
 	public void setRegiao(List<RegiaoModel> regiao) {
 		this.regiao = regiao;
 	}
-	
-
 	
 }

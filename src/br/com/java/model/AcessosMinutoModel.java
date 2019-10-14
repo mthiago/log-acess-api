@@ -1,5 +1,6 @@
 package br.com.java.model;
 
+//OK
 public class AcessosMinutoModel {
 
 	private Integer minuto;

@@ -17,12 +17,13 @@ import br.com.java.database.DatabaseConnection;
 import br.com.java.model.AcessosMinutoModel;
 import br.com.java.model.AcessosModel;
 import br.com.java.model.LogModel;
-import br.com.java.model.Metric1Response;
+import br.com.java.model.PosicaoAcessoResponse;
 import br.com.java.model.RegiaoModel;
 import br.com.java.model.RegioesModel;
 
 public class LogAcessService {
 
+	//OK
 	public Connection getConnection() {
 		Connection connection = null;
 		try {
@@ -33,6 +34,7 @@ public class LogAcessService {
 		return connection;
 	}
 
+	//OK
 	public String consultaMetricas(String data) {
 		String metricas = "";
 		LogAcessDao logAcessDao = new LogAcessDao();
@@ -51,38 +53,35 @@ public class LogAcessService {
 	}
 
 	public String consultaPrimeiraMetrica(Connection connection, LogAcessDao logAcessDao) throws SQLException{
-		String msgReturn ="";
 		Integer catsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%'");
 		Integer dogsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%'");
 		Integer bidInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/tiggers/bid/now%'");
 
-		List<Metric1Response> response = new ArrayList<Metric1Response>();
+		List<PosicaoAcessoResponse> response = new ArrayList<PosicaoAcessoResponse>();
 		
-		Metric1Response cat = buildInfos(catsInteger, "/pets/exotic/cats/10");
-		Metric1Response dog = buildInfos(dogsInteger, "/pets/guaipeca/dogs/1");
-		Metric1Response bid = buildInfos(catsInteger, "/tiggers/bid/now");
+		PosicaoAcessoResponse cat = buildInfos(catsInteger, "/pets/exotic/cats/10");
+		PosicaoAcessoResponse dog = buildInfos(dogsInteger, "/pets/guaipeca/dogs/1");
+		PosicaoAcessoResponse bid = buildInfos(catsInteger, "/tiggers/bid/now");
 		response.add(cat);
 
-		List<Metric1Response> ordenada = response.stream()
-				.sorted(Comparator.comparing(Metric1Response::getPosition).reversed())
+		List<PosicaoAcessoResponse> ordenada = response.stream()
+				.sorted(Comparator.comparing(PosicaoAcessoResponse::getPosition).reversed())
 				.collect(Collectors.toList()); 
 
 		String infos = "";
 		StringBuilder msg = new StringBuilder();
-		for (Metric1Response r : ordenada) {
+		for (PosicaoAcessoResponse r : ordenada) {
 			if (r.getPosition() != null && r.getUrl() != null) {
 				infos = "A url mais acessada no mundo é " + r.getUrl() + " e ela teve " + r.getPosition() + " acessos\n";
 				msg.append(infos);
 			}
 		}
 
-		msgReturn = msg.toString();
-
-		return msgReturn;
+		return msg.toString();
 	}
 
-	private Metric1Response buildInfos(Integer quantidade, String url) {
-		Metric1Response metricResponse = new Metric1Response();
+	private PosicaoAcessoResponse buildInfos(Integer quantidade, String url) {
+		PosicaoAcessoResponse metricResponse = new PosicaoAcessoResponse();
 		metricResponse.setPosition(quantidade);
 		metricResponse.setUrl(url);
 		return metricResponse;
@@ -181,19 +180,19 @@ public class LogAcessService {
 		Integer bidsInteger = logAcessDao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/tiggers/bid/now%' and timestamp = " + timestamp.getTime());
 
 
-		List<Metric1Response> response = new ArrayList<Metric1Response>();
+		List<PosicaoAcessoResponse> response = new ArrayList<PosicaoAcessoResponse>();
 
-		Metric1Response cat = buildInfos(catsInteger, "/pets/exotic/cats/10");
-		Metric1Response dog = buildInfos(dogsInteger, "/pets/guaipeca/dogs/1");
-		Metric1Response bid = buildInfos(catsInteger, "/tiggers/bid/now");
+		PosicaoAcessoResponse cat = buildInfos(catsInteger, "/pets/exotic/cats/10");
+		PosicaoAcessoResponse dog = buildInfos(dogsInteger, "/pets/guaipeca/dogs/1");
+		PosicaoAcessoResponse bid = buildInfos(catsInteger, "/tiggers/bid/now");
 
-		List<Metric1Response> ordenada = response.stream()
-				.sorted(Comparator.comparing(Metric1Response::getPosition).reversed())
+		List<PosicaoAcessoResponse> ordenada = response.stream()
+				.sorted(Comparator.comparing(PosicaoAcessoResponse::getPosition).reversed())
 				.collect(Collectors.toList()); 
 
 		String infos = "";
 		StringBuilder msg = new StringBuilder();
-		for (Metric1Response r : ordenada) {
+		for (PosicaoAcessoResponse r : ordenada) {
 			if (r.getPosition() != null && r.getUrl() != null) {
 				infos = "A url: " + r.getUrl() + "ficou na posiçao: " + r.getPosition() + "no dia" + data;
 				msg.append(infos);

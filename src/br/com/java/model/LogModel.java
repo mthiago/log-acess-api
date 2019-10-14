@@ -2,6 +2,7 @@ package br.com.java.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+//OK
 @XmlRootElement
 public class LogModel {
 

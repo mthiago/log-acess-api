@@ -4,26 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import br.com.java.database.DatabaseConnection;
-import br.com.java.model.AcessosMinutoModel;
-import br.com.java.model.AcessosModel;
 import br.com.java.model.LogModel;
-import br.com.java.model.Metric1Response;
-import br.com.java.model.RegiaoModel;
-import br.com.java.model.RegioesModel;
 
 public class LogAcessDao {
 
+	//OK
 	public Boolean salvarLog(LogModel request) {
 		PreparedStatement pstmt = null;
 		try {
@@ -46,25 +35,27 @@ public class LogAcessDao {
 		}
 	}
 	
+	//OK
 	public Integer consultaDadosUrl(Connection connection, String query) throws SQLException {
 		PreparedStatement Stmt = connection.prepareStatement(query);
 		ResultSet rs = Stmt.executeQuery();
 		rs.next();
 		String retorno = rs.getString(1);
-		Integer number = Integer.valueOf(retorno);
+		Integer quantidade = Integer.valueOf(retorno);
 		Stmt.close();
-		return number;
+		return quantidade;
 	}
 	
+	//OK
 	public List<Long> consultaDadosTimestamp(Connection connection, String query) throws SQLException {
 		PreparedStatement Stmt = connection.prepareStatement(query);
 		ResultSet rs = Stmt.executeQuery();	
-		List<Long> asdadqd = new ArrayList<>();
+		List<Long> listTimestamp = new ArrayList<>();
 		while (rs.next()) {
-			Long ada = rs.getLong("timestamp");
-			asdadqd.add(ada);
+			Long timestamp = rs.getLong("timestamp");
+			listTimestamp.add(timestamp);
 		}
-		return asdadqd;
+		return listTimestamp;
 	}
 
 }

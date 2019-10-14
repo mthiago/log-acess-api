@@ -1,6 +1,7 @@
 package br.com.java.model;
 
-public class Metric1Response {
+//OK
+public class PosicaoAcessoResponse {
 
 	private String url;
 	private Integer position;

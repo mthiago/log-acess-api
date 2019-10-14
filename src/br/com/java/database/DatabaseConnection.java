@@ -12,8 +12,8 @@ public class DatabaseConnection {
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "123456";
 	
+	//OK
 	public static Connection getConnection() throws SQLException {
-
 		try {
 			String basePath = new File("").getAbsolutePath();
 			Class.forName("org.sqlite.JDBC");

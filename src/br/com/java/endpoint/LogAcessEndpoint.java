@@ -18,6 +18,7 @@ public class LogAcessEndpoint {
 
 	LogAcessService service = new LogAcessService();
 
+	//OK
 	@GET
 	@Path("/laar/metrics/{data}")
 	@Produces("application/json;charset=utf-8")
@@ -32,6 +33,7 @@ public class LogAcessEndpoint {
 		return metrics;
 	}
 
+	//OK
 	@POST
 	@Path("/laar/ingest")
 	@Produces("application/json;charset=utf-8")
