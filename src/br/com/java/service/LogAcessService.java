@@ -45,7 +45,7 @@ public class LogAcessService {
 			String terceiraMetrica = consultaTerceiraMetrica(connection, dao);
 			String quartaMetrica = consultaQuartaMetrica(connection, dao, data);
 			String quintaMetrica = consultaQuintaMetrica(connection, dao);
-			metricas = primeiraMetrica + segundaMetrica + terceiraMetrica + quartaMetrica + quintaMetrica;
+			metricas = primeiraMetrica + "\n" + segundaMetrica + "\n" + terceiraMetrica + "\n" + quartaMetrica +"\n" + quintaMetrica;
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -67,18 +67,19 @@ public class LogAcessService {
 
 		List<PosicaoAcessoModel> listaOrdenada = ordenaPosicaoAcesso(listaPosicaoAcesso); 
 
-		StringBuilder mensagem = new StringBuilder();
-		mensagem = montaRespPrimeiraMetrica(listaOrdenada, mensagem);
+		StringBuilder mensagem = montaRespPrimeiraMetrica(listaOrdenada);
 
 		return mensagem.toString();
 	}
 
 	//ok
-	private StringBuilder montaRespPrimeiraMetrica(List<PosicaoAcessoModel> listaOrdenada, StringBuilder mensagem) {
-		String infos = "";
+	private StringBuilder montaRespPrimeiraMetrica(List<PosicaoAcessoModel> listaOrdenada) {
+		String texto = "As urls mais acessadas no mundo inteiro são: \n";
+		StringBuilder mensagem = new StringBuilder();
+		mensagem.append(texto);
 		for (PosicaoAcessoModel model : listaOrdenada) {
 			if (model.getPosicao() != null && model.getUrl() != null) {
-				infos = "A url mais acessada no mundo é " + model.getUrl() + " e ela teve " + model.getPosicao() + " acessos\n";
+				String infos = model.getUrl() + " - " + model.getPosicao() + " acessos\n";
 				mensagem.append(infos);
 			}
 		}
@@ -161,17 +162,19 @@ public class LogAcessService {
 
 	//ok
 	private String montaRetornoSegundaMetrica(List<AcessosModel> listaAcessosRegiaoUm, List<AcessosModel> listaAcessosRegiaoDois, List<AcessosModel> listaAcessosRegiaoTres) {
-		StringBuilder mensagem = new StringBuilder();
-		for (AcessosModel acessos : listaAcessosRegiaoUm) {
-			mensagem.append("Quantidade de acessos região 1: " + acessos.getAnimal() + "nro: " + acessos.getAcessos() + "\n"); 	  
+		String texto = "Quantidade de acessos por região: \n";
+		String mensagemRegiaoUm = montaMensagemSegundaMetrica(listaAcessosRegiaoUm, 1);
+		String mensagemRegiaoDois = montaMensagemSegundaMetrica(listaAcessosRegiaoDois, 2);
+		String mensagemRegiaoTres = montaMensagemSegundaMetrica(listaAcessosRegiaoTres, 3);
+		return texto + mensagemRegiaoUm + mensagemRegiaoDois + mensagemRegiaoTres;
+	}
+
+	private String montaMensagemSegundaMetrica(List<AcessosModel> listaAcessosRegiao, Integer regiao) {
+		String mensagem = "";
+		for (AcessosModel acessos : listaAcessosRegiao) {
+			mensagem+= "A região " + regiao + " teve " + acessos.getAcessos() + " para a url " + acessos.getAnimal() + "\n"; 	  
 		}
-		for (AcessosModel acessos : listaAcessosRegiaoDois) {
-			mensagem.append("Quantidade de acessos região 2: " + acessos.getAnimal() + "nro: " + acessos.getAcessos() + "\n"); 	  
-		}
-		for (AcessosModel acessos : listaAcessosRegiaoTres) {
-			mensagem.append("Quantidade de acessos região 3: " + acessos.getAnimal() + "nro: " + acessos.getAcessos() + "\n"); 	  
-		}
-		return mensagem.toString();
+		return mensagem;
 	}
 
 	//ok
@@ -203,13 +206,29 @@ public class LogAcessService {
 		Integer quantidadeGato = dao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%'");
 		Integer quantidadeCachorro = dao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%'");
 		Integer quantidadeTigre = dao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/tiggers/bid/now%'");
-		String mensagem = "Cat: " + quantidadeGato + "///// Dog: " + quantidadeCachorro + "/////bids: " + quantidadeTigre;
-		return mensagem;
+
+		List<PosicaoAcessoModel> listaPosicaoAcesso = new ArrayList<PosicaoAcessoModel>();
+		
+		PosicaoAcessoModel quantidadeAcessosGato = montaPosicaoModel(quantidadeGato, "/pets/exotic/cats/10");
+		PosicaoAcessoModel quantidadeAcessosCachorro = montaPosicaoModel(quantidadeCachorro, "/pets/guaipeca/dogs/1");
+		PosicaoAcessoModel quantidadeAcessosTigre = montaPosicaoModel(quantidadeTigre, "/tiggers/bid/now");
+
+		addListaPrimeiraMetrica(listaPosicaoAcesso, quantidadeAcessosGato, quantidadeAcessosCachorro, quantidadeAcessosTigre);
+		
+		List<PosicaoAcessoModel> listaOrdenada = listaPosicaoAcesso.stream()
+				.sorted(Comparator.comparing(PosicaoAcessoModel::getPosicao))
+				.collect(Collectors.toList());
+		
+		String urlMenosAcessada = listaOrdenada.get(0).getUrl();
+		Integer quantidadeAcessos = listaOrdenada.get(0).getPosicao();
+		
+		return "A url com menos acesso no mundo inteiro é " + urlMenosAcessada + " e possui " + quantidadeAcessos + " acessos \n";
 	}
 
 	//ok
 	public String consultaQuartaMetrica(Connection connection, LogAcessDao dao, String data) throws SQLException, ParseException {
-		Timestamp timestamp = montaTimestamp(data);
+		String novaData = data.replace("data=", "").replace("-", "/");
+		Timestamp timestamp = montaTimestamp(novaData);
 
 		Integer quantidadeGato = dao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/exotic/cats/10%' and timestamp like '%" + timestamp.getTime() + "%'");
 		Integer quantidadeCachorro = dao.consultaDadosUrl(connection, "select count(*) from logs where url like '%/pets/guaipeca/dogs/1%' and timestamp = " + timestamp.getTime());
@@ -227,19 +246,17 @@ public class LogAcessService {
 				.sorted(Comparator.comparing(PosicaoAcessoModel::getPosicao).reversed())
 				.collect(Collectors.toList()); 
 
-		String infos = montaRetornoQuartaMetrica(data, listaOrdenada);
-
-		return infos;
+		return montaRetornoQuartaMetrica(novaData, listaOrdenada);
 	}
 
 	//ok
 	private String montaRetornoQuartaMetrica(String data, List<PosicaoAcessoModel> listaOrdenada) {
-		String infos;
+		String texto = "As urls mais acessadas no dia " + data + " são: \n";
 		StringBuilder mensagem = new StringBuilder();
+		mensagem.append(texto);
 		for (PosicaoAcessoModel model : listaOrdenada) {
 			if (model.getPosicao() != null && model.getUrl() != null) {
-				infos = "A url: " + model.getUrl() + "ficou na posiçao: " + model.getPosicao() + "no dia" + data;
-				mensagem.append(infos);
+				mensagem.append(model.getPosicao() + " acessos: " + model.getUrl() + "\n");
 			}
 		}
 		return mensagem.toString();
@@ -247,9 +264,8 @@ public class LogAcessService {
 
 	//ok
 	private Timestamp montaTimestamp(String data) throws ParseException {
-		String novaData = data.replace("data=", "").replace("-", "/");
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = (Date)formatter.parse(novaData);
+		Date date = (Date)formatter.parse(data);
 		Timestamp timestamp = new Timestamp(date.getTime());
 		return timestamp;
 	}
@@ -262,7 +278,20 @@ public class LogAcessService {
 			Integer minuto = verificaMinutoTimestamp(timestamp);
 			montaAcessoMinuto(acessosMinuto, minuto);
 		}
-		return null;
+		Integer minutoMaisAcesso = montaRetornoQuintaMetrica(acessosMinuto);
+		return "O minuto com mais acessos de todas urls é " + minutoMaisAcesso;
+	}
+
+	private Integer montaRetornoQuintaMetrica(List<AcessosMinutoModel> acessosMinuto) {
+		Integer minutoMaisAcesso = 0;
+		for (AcessosMinutoModel acessos : acessosMinuto) {
+			if (acessos.getQuantidade() != null) {
+				if (acessos.getQuantidade() > minutoMaisAcesso) {
+					minutoMaisAcesso = acessos.getQuantidade();
+				}
+			}
+		}
+		return minutoMaisAcesso;
 	}
 
 	//ok

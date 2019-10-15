@@ -32,16 +32,17 @@ public class LogAcessEndpoint {
 	//ok
 	@GET
 	@Path("/laar/metrics/{data}")
-	@Produces("application/json;charset=utf-8")
+	@Produces("text/plain")
 	@Consumes("application/json")
-	public String metrics(@PathParam("data") String data) {
+	public Response metrics(@PathParam("data") String data) {
 		String metrics = "";
 		try {
-		metrics = service.consultaMetricas(data);
+			metrics = service.consultaMetricas(data);
 		} catch (Exception e) {
 			e.getStackTrace();
+			return Response.status(Response.Status.BAD_REQUEST).entity("Erro").build();
 		}
-		return metrics;
+		return Response.status(Response.Status.OK).entity(metrics).build();
 	}
 
 	//ok
