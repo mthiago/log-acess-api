@@ -2,7 +2,6 @@ package br.com.java.model;
 
 import java.util.List;
 
-//OK
 public class RegioesModel {
 
 	private List<RegiaoModel> regiao;

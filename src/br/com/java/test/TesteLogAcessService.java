@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import br.com.java.dao.LogAcessDao;
 import br.com.java.model.AcessosModel;
 import br.com.java.model.LogModel;
-import br.com.java.model.PosicaoAcessoResponse;
+import br.com.java.model.PosicaoAcessoModel;
 import br.com.java.model.RegiaoModel;
 
 class TesteLogAcessService {
@@ -139,11 +139,11 @@ class TesteLogAcessService {
 		Integer bidsInteger = 3;
 
 
-		List<PosicaoAcessoResponse> response = new ArrayList<PosicaoAcessoResponse>();
+		List<PosicaoAcessoModel> response = new ArrayList<PosicaoAcessoModel>();
 
-		PosicaoAcessoResponse cat = new PosicaoAcessoResponse();
-		PosicaoAcessoResponse dog = new PosicaoAcessoResponse();
-		PosicaoAcessoResponse bid = new PosicaoAcessoResponse();
+		PosicaoAcessoModel cat = new PosicaoAcessoModel();
+		PosicaoAcessoModel dog = new PosicaoAcessoModel();
+		PosicaoAcessoModel bid = new PosicaoAcessoModel();
 		
 		cat.setPosition(2);
 		cat.setUrl("/pets/exotic/cats/10");
@@ -155,13 +155,13 @@ class TesteLogAcessService {
 		bid.setUrl("/tiggers/bid/now");
 
 
-		List<PosicaoAcessoResponse> ordenada = response.stream()
-				.sorted(Comparator.comparing(PosicaoAcessoResponse::getPosition).reversed())
+		List<PosicaoAcessoModel> ordenada = response.stream()
+				.sorted(Comparator.comparing(PosicaoAcessoModel::getPosition).reversed())
 				.collect(Collectors.toList()); 
 
 		String infos = "";
 		StringBuilder msg = new StringBuilder();
-		for (PosicaoAcessoResponse r : ordenada) {
+		for (PosicaoAcessoModel r : ordenada) {
 			if (r.getPosition() != null && r.getUrl() != null) {
 				infos = "A url: " + r.getUrl() + "ficou na posiçao: " + r.getPosition() + "no dia" + data;
 				msg.append(infos);

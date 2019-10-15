@@ -1,6 +1,5 @@
 package br.com.java.model;
 
-//OK
 public class AcessosModel {
 
 	private String animal;

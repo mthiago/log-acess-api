@@ -1,6 +1,5 @@
 package br.com.java.database;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,7 +11,7 @@ public class DatabaseConnection {
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "123456";
 	
-	//OK
+	//ok - possível melhoria url relativa dbPath
 	public static Connection getConnection() throws SQLException {
 		try {
 			Class.forName("org.sqlite.JDBC");
