@@ -20,7 +20,6 @@ import br.com.java.model.AcessosModel;
 import br.com.java.model.LogModel;
 import br.com.java.model.PosicaoAcessoModel;
 import br.com.java.model.RegiaoModel;
-import br.com.java.model.RegioesModel;
 
 public class LogAcessService {
 
@@ -152,14 +151,9 @@ public class LogAcessService {
 		RegiaoModel regiaoDois = criaRegiao(acessosRegiaoDois);
 		RegiaoModel regiaoTres = criaRegiao(acessosRegiaoTres);
 
-		List<RegiaoModel> listaRegiao = criaListaRegiao(regiaoUm, regiaoDois, regiaoTres);
-
-		RegioesModel regioes = new RegioesModel();
-		regioes.setRegiao(listaRegiao);
-
-		List<AcessosModel> listaAcessosRegiaoUm = ordenarListaDecrescente(regioes.getRegiao().get(0));
-		List<AcessosModel> listaAcessosRegiaoDois = ordenarListaDecrescente(regioes.getRegiao().get(1));
-		List<AcessosModel> listaAcessosRegiaoTres = ordenarListaDecrescente(regioes.getRegiao().get(2));
+		List<AcessosModel> listaAcessosRegiaoUm = ordenarListaDecrescente(regiaoUm);
+		List<AcessosModel> listaAcessosRegiaoDois = ordenarListaDecrescente(regiaoDois);
+		List<AcessosModel> listaAcessosRegiaoTres = ordenarListaDecrescente(regiaoTres);
 
 		String infos = montaRetornoSegundaMetrica(listaAcessosRegiaoUm, listaAcessosRegiaoDois, listaAcessosRegiaoTres);
 		return infos;
@@ -178,15 +172,6 @@ public class LogAcessService {
 			mensagem.append("Quantidade de acessos região 3: " + acessos.getAnimal() + "nro: " + acessos.getAcessos() + "\n"); 	  
 		}
 		return mensagem.toString();
-	}
-
-	//ok
-	private List<RegiaoModel> criaListaRegiao(RegiaoModel regiaoUm, RegiaoModel regiaoDois, RegiaoModel regiaoTres) {
-		List<RegiaoModel> listaRegiao = new ArrayList<RegiaoModel>();
-		listaRegiao.add(regiaoUm);
-		listaRegiao.add(regiaoDois);
-		listaRegiao.add(regiaoTres);
-		return listaRegiao;
 	}
 
 	//ok
