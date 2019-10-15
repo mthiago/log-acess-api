@@ -2,6 +2,7 @@ package br.com.java.test;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -127,7 +128,7 @@ class TesteLogAcessService {
 	}
 	
 	@Test
-	public void testeConsultaQuartaMetrica() {
+	public void testeConsultaQuartaMetrica() throws ParseException {
 		String data = "11/02/1964";
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = (Date)formatter.parse(data);
@@ -167,7 +168,7 @@ class TesteLogAcessService {
 			}
 		}
 
-		msgReturn = msg.toString();		
+		String msgReturn = msg.toString();		
 	}
 	
 }

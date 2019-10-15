@@ -15,9 +15,8 @@ public class DatabaseConnection {
 	//OK
 	public static Connection getConnection() throws SQLException {
 		try {
-			String basePath = new File("").getAbsolutePath();
 			Class.forName("org.sqlite.JDBC");
-			String dbPath = "jdbc:sqlite:" + basePath + "/utils/database/database.db";
+			String dbPath = "jdbc:sqlite:C:/Users/thiag/Desktop/projetos/log-acess-api/utils/database/database.db";
 			Connection conn = DriverManager.getConnection(dbPath, DB_USER, DB_PASSWORD);
 			return conn;
 		} catch (Exception e) {
