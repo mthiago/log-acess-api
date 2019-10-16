@@ -7,7 +7,7 @@ WEBSERVICE API REST JAVA
 /laaa/health - consulta vida da aplicação
 ------------ 
 [GET] - http://localhost:8080/log-acess-api/app/log-acess/laar/health
-200 - ON
+<p>200 - ON</p>
 500 - OFF
 
 /laaa/ingest - recebe logs de acesso
