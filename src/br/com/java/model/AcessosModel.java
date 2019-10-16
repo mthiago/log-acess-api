@@ -5,7 +5,8 @@ public class AcessosModel {
 	private String animal;
 	private Integer regiao;
 	private Integer acessos;
-
+	private String url;
+	
 	public String getAnimal() {
 		return animal;
 	}
@@ -23,6 +24,12 @@ public class AcessosModel {
 	}
 	public void setAcessos(Integer acessos) {
 		this.acessos = acessos;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 }
