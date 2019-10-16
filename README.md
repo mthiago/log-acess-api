@@ -1,5 +1,7 @@
 # log-acess-api
 WEBSERVICE API REST JAVA
+Importe o projeto para sua IDE, após isso importe os .jars que estão em /WebContent/WEB-INF/lib
+Para rodar a aplicação, pode ser utilizado Tomcat ou qualquer server de sua preferência.
 
 # utilidade
 - Retorna informações (métricas) de acesso à determinadas URLs.
