@@ -1,7 +1,5 @@
 package br.com.java.test;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +13,13 @@ class TesteLogAcessDao {
 		Integer quantidade = Integer.valueOf(retorno);
 		assert(quantidade.equals(1));		
 	}
-	
+
+	@Test
 	public void TesteConsultaDadosTimestamp() {
 		List<Long> listTimestamp = new ArrayList<>();
 		Long timestamp = Long.valueOf(124123123);
 		listTimestamp.add(timestamp);
 		assert(listTimestamp.get(0).equals(Long.valueOf(124123123)));
 	}
-	
+
 }

@@ -12,7 +12,6 @@ import br.com.java.model.LogModel;
 
 public class LogAcessDao {
 
-	//ok
 	public Boolean salvarLog(LogModel request) {
 		PreparedStatement pstmt = null;
 		try {
@@ -34,8 +33,7 @@ public class LogAcessDao {
 			return false;
 		}
 	}
-	
-	//ok
+
 	public Integer consultaDadosUrl(Connection connection, String query) throws SQLException {
 		PreparedStatement Stmt = connection.prepareStatement(query);
 		ResultSet rs = Stmt.executeQuery();
@@ -45,7 +43,7 @@ public class LogAcessDao {
 		Stmt.close();
 		return quantidade;
 	}
-	//ok
+
 	public List<Long> consultaDadosTimestamp(Connection connection, String query) throws SQLException {
 		PreparedStatement Stmt = connection.prepareStatement(query);
 		ResultSet rs = Stmt.executeQuery();	

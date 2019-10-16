@@ -1,6 +1,5 @@
 package br.com.java.model;
 
-//ok
 public class PosicaoAcessoModel {
 
 	private String url;
@@ -19,4 +18,6 @@ public class PosicaoAcessoModel {
 		this.posicao = posicao;
 	}
 
+
+	
 }
