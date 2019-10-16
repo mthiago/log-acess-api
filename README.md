@@ -1,6 +1,7 @@
 # log-acess-api
 WEBSERVICE API REST JAVA
 <p>Importe o projeto para sua IDE, após isso importe os .jars que estão em /WebContent/WEB-INF/lib</p>
+<p>O arquivo utils/database/database.db que se encontra na raíz do projeto, deverá ser importado para sua máquina, após isso, apontar o caminho escolhido no arquivo src/DatabaseConfig.properties</p>
 <p>Para rodar a aplicação, pode ser utilizado Tomcat ou qualquer server de sua preferência.</p>
 
 # utilidade
