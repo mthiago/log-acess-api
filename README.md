@@ -1,18 +1,18 @@
 # log-acess-api
 WEBSERVICE API REST JAVA
 
-# Utilidade
+# utilidade
 - Retorna informações (métricas) de acesso à determinadas URLs.
 
-/laaa/health - Consulta vida da aplicação
+/laaa/health - consulta vida da aplicação
 ------------ 
-[GET] - http://localhost:8080/laaa/health
+[GET] - http://localhost:8080/log-acess-api/app/log-acess/laar/health
 200 - ON
 500 - OFF
 
-/laaa/ingest - Recebe logs de acesso
+/laaa/ingest - recebe logs de acesso
 ------------ 
-[POST] - http://localhost:8080/laaa/ingest
+[POST] - http://localhost:8080/log-acess-api/app/log-acess/laar/ingest
 
 {
 	"url": "/pets/exotic/cats/10",
@@ -21,9 +21,9 @@ WEBSERVICE API REST JAVA
 	"region": 1
 }
 
-/laa/metrics - Retorna métricas
+/laa/metrics - retorna métricas
 ------------ 
-[GET] - http://localhost:8080/laa/metrics&data=21-11-2015
+[GET] - http://localhost:8080/log-acess-api/app/log-acess/laar/metrics/data=20-11-2002
 
 Métrica 1 - Top 3 URL acessadas no mundo inteiro
 Métrica 2 - Top 3 URL acessadas por região
