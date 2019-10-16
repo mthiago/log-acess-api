@@ -28,8 +28,8 @@ WEBSERVICE API REST JAVA
 ------------ 
 [GET] - http://localhost:8080/log-acess-api/app/log-acess/laar/metrics/data=20-11-2002
 
-Métrica 1 - Top 3 URL acessadas no mundo inteiro
-Métrica 2 - Top 3 URL acessadas por região
-Métrica 3 - URL com mais menos no mundo inteiro
-Métrica 4 - Top 3 acessos por dia, mês e ano - recebe data por parâmetro (&data)
-Métrica 5 - Minuto com mais acesso em todas URLs
+<p>Métrica 1 - Top 3 URL acessadas no mundo inteiro</p>
+<p>Métrica 2 - Top 3 URL acessadas por região</p>
+<p>Métrica 3 - URL com mais menos no mundo inteiro</p>
+<p>Métrica 4 - Top 3 acessos por dia, mês e ano - recebe data por parâmetro (&data)</p>
+<p>Métrica 5 - Minuto com mais acesso em todas URLs</p>
