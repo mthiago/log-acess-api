@@ -8,7 +8,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import br.com.java.model.LogModel;
 import br.com.java.service.LogAcessService;
@@ -20,7 +19,6 @@ public class LogAcessEndpoint {
 
 	LogAcessService service = new LogAcessService();
 
-	//ok
 	@GET
 	@Path("/laar/health")
 	@Produces("application/json;charset=utf-8")
@@ -28,8 +26,7 @@ public class LogAcessEndpoint {
 	public Response health() {
 		return Response.status(Response.Status.OK).build();
 	}	
-	
-	//ok
+
 	@GET
 	@Path("/laar/metrics/{data}")
 	@Produces("text/plain")
@@ -45,7 +42,6 @@ public class LogAcessEndpoint {
 		return Response.status(Response.Status.OK).entity(metrics).build();
 	}
 
-	//ok
 	@POST
 	@Path("/laar/ingest")
 	@Produces("application/json;charset=utf-8")

@@ -13,8 +13,7 @@ public class DatabaseConnection {
 	private static final String DB_PASSWORD = "123456";
 	private static ResourceBundle bundle;
 	private static String caminho;
-	
-	//ok - possível melhoria url relativa dbPath
+
 	public static Connection getConnection() throws SQLException {
 		try {
 			bundle = ResourceBundle.getBundle("DatabaseConfig");
