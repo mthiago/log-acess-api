@@ -9,5 +9,29 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/asm-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jackson-all-1.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jackson-databind-2.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jackson-mapper-asl-1.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jersey-core-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jersey-json-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jersey-media-json-jackson-2.29.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jersey-server-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jersey-servlet-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jetty-server-10.0.0-alpha0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/log-acess-api/WebContent/WEB-INF/lib/sqlite-jdbc-3.27.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/asm-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jackson-all-1.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jackson-databind-2.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jackson-mapper-asl-1.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jersey-core-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jersey-json-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jersey-media-json-jackson-2.29.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jersey-server-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jersey-servlet-1.19.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jetty-server-10.0.0-alpha0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/thiag/Desktop/projetos/ilegra/ilegra3/log-acess-api/WebContent/WEB-INF/lib/sqlite-jdbc-3.27.2.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
