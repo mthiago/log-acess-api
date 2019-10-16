@@ -8,7 +8,7 @@ WEBSERVICE API REST JAVA
 ------------ 
 [GET] - http://localhost:8080/log-acess-api/app/log-acess/laar/health
 <p>200 - ON</p>
-500 - OFF
+<p>500 - OFF</p>
 
 /laaa/ingest - recebe logs de acesso
 ------------ 
